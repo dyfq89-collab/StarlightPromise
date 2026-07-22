@@ -33,7 +33,7 @@ class MapManager:
 
                         "y":3,
 
-                        "symbol":"📜",
+                        "tile":"letter",
 
                         "event":"old_letter_found"
 
@@ -47,7 +47,7 @@ class MapManager:
 
                         "y":4,
 
-                        "symbol":"📦",
+                        "tile":"box",
 
                         "event":"open_box"
 
@@ -61,7 +61,7 @@ class MapManager:
 
                         "y":1,
 
-                        "symbol":"⭐",
+                        "tile":"star",
 
                         "event":"look_star"
 
