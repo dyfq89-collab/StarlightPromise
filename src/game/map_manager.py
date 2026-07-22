@@ -35,7 +35,7 @@ class MapManager:
 
                         "symbol":"📜",
 
-                        "event":"find_letter"
+                        "event":"old_letter_found"
 
                     },
 
