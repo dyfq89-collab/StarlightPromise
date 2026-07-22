@@ -4,6 +4,7 @@ from game.story_manager import StoryManager
 from game.npc_manager import NPCManager
 from game.item_manager import ItemManager
 from game.event_manager import EventManager
+from game.map_manager import MapManager
 
 
 
@@ -23,6 +24,8 @@ class GameController:
         self.items = ItemManager()
 
         self.events = EventManager()
+        
+        self.map = MapManager()
 
 
 
@@ -73,4 +76,29 @@ class GameController:
 
         return self.events.trigger(
             "old_letter_found"
+        )
+        
+     def move_player(self,direction):
+
+
+        self.player.move(direction)
+
+
+        x,y = self.player.get_position()
+
+
+        current_map = self.map.get_map()
+
+
+        for obj in current_map["objects"].values():
+
+            if obj["x"] == x and obj["y"] == y:
+
+                return self.events.trigger(
+                    obj["event"]
+                )
+
+
+        return (
+            f"当前位置：{x},{y}"
         )
