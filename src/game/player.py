@@ -47,3 +47,11 @@ class Player:
     def has_item(self,item):
 
         return item in self.inventory
+
+
+    def get_position(self):
+
+        return (
+            self.x,
+            self.y
+        )
