@@ -65,6 +65,24 @@ class MapView(GridLayout):
 
                 cell.text="·"
 
+        current_map = (
+    self.controller.map.get_map()
+)
+
+
+
+for obj in current_map["objects"].values():
+
+
+    ox = obj["x"]
+
+    oy = obj["y"]
+
+
+    self.cells[oy][ox].text = (
+        obj["symbol"]
+    )
+
 
 
         # 获取玩家位置
