@@ -1,0 +1,1 @@
+# Starlight Promise Game Core
