@@ -36,5 +36,5 @@ self.events = {
 
         return self.events.get(
             event,
-            ""
+             "这里什么也没有发生。"
         )
