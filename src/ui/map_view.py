@@ -87,11 +87,21 @@ for obj in current_map["objects"].values():
 
         # 获取玩家位置
 
-        x,y = self.controller.player.get_position()
+# 获取玩家位置
+
+x,y = self.controller.player.get_position()
+
+
+if 0 <= x < self.cols and 0 <= y < self.rows:
+
+    self.cells[y][x].text = "😊"
 
 
 
-        if x < 5 and y < 5:
+# 玩家脚下检测
 
+for obj in current_map["objects"].values():
 
-            self.cells[y][x].text="😀"
+    if obj["x"] == x and obj["y"] == y:
+
+        self.cells[y][x].text = "😊" + obj["symbol"]
