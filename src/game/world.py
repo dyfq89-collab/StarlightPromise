@@ -3,46 +3,65 @@ class World:
 
     def __init__(self):
 
-        self.locations = {
+        self.maps = {
 
 
-            "star_light_house":
+            "star_light_forest":
+
             {
-                "name":"星光小屋",
 
-                "description":
-                "这里保存着许多珍贵的回忆。",
-
-                "items":
-                [
-                    "old_letter"
-                ]
-            },
+                "name":"星光森林",
 
 
-            "memory_forest":
-            {
-                "name":"回忆森林",
+                "width":5,
 
-                "description":
-                "森林里隐藏着过去的秘密。",
-
-                "items":
-                [
-                    "star_fragment"
-                ]
-            },
+                "height":5,
 
 
-            "star_light_lake":
-            {
-                "name":"星光湖",
+                "objects":{
 
-                "description":
-                "湖面倒映着满天星光。",
 
-                "items":
-                []
+                    "old_letter":
+
+                    {
+
+                        "x":2,
+
+                        "y":3,
+
+                        "event":"find_letter"
+
+                    },
+
+
+                    "star_box":
+
+                    {
+
+                        "x":4,
+
+                        "y":4,
+
+                        "event":"open_box"
+
+                    },
+
+
+                    "star_tree":
+
+                    {
+
+                        "x":1,
+
+                        "y":1,
+
+                        "event":"look_star"
+
+                    }
+
+
+                }
+
             }
 
 
@@ -50,6 +69,6 @@ class World:
 
 
 
-    def get_location(self,name):
+    def get_map(self,map_id):
 
-        return self.locations.get(name)
+        return self.maps.get(map_id)
