@@ -3,15 +3,19 @@ class MapManager:
 
     def __init__(self):
 
-        self.current_map = "star_house"
+
+        self.current_map = "star_light_house"
+
 
 
         self.maps = {
 
 
-            "star_house":
+            "star_light_house":
             {
+
                 "name":"星光小屋",
+
 
                 "width":5,
 
@@ -21,43 +25,46 @@ class MapManager:
                 "objects":
                 {
 
-                    "desk":
+
+                    "old_letter":
                     {
+
                         "x":2,
-                        "y":2,
+
+                        "y":3,
+
+                        "symbol":"📜",
+
                         "event":"find_letter"
+
+                    },
+
+
+                    "box":
+                    {
+
+                        "x":4,
+
+                        "y":4,
+
+                        "symbol":"📦",
+
+                        "event":"open_box"
+
                     },
 
 
                     "window":
                     {
-                        "x":4,
+
+                        "x":1,
+
                         "y":1,
+
+                        "symbol":"⭐",
+
                         "event":"look_star"
-                    }
 
-                }
-
-            },
-
-
-            "memory_forest":
-            {
-                "name":"回忆森林",
-
-                "width":8,
-
-                "height":8,
-
-
-                "objects":
-                {
-
-                    "tree":
-                    {
-                        "x":5,
-                        "y":5,
-                        "event":"forest_memory"
                     }
 
                 }
@@ -73,16 +80,3 @@ class MapManager:
         return self.maps[
             self.current_map
         ]
-
-
-
-    def change_map(self,map_id):
-
-        if map_id in self.maps:
-
-            self.current_map = map_id
-
-            return True
-
-
-        return False
