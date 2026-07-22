@@ -1,5 +1,6 @@
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
+from kivy.uix.image import Image
 
 
 
@@ -35,9 +36,10 @@ class MapView(GridLayout):
 
             for x in range(5):
 
-                cell = Label(
-                    text="·",
-                    font_size=30
+                cell = Image(
+                   source="assets/grass.png",
+                   allow_stretch=True,
+                   keep_ratio=False
                 )
 
 
@@ -63,7 +65,7 @@ class MapView(GridLayout):
 
             for cell in row:
 
-                cell.text="·"
+                cell.source="assets/grass.png"
 
         current_map = (
     self.controller.map.get_map()
@@ -79,9 +81,11 @@ for obj in current_map["objects"].values():
     oy = obj["y"]
 
 
-    self.cells[oy][ox].text = (
-        obj["symbol"]
-    )
+    self.cells[y][x].source = (
+    "assets/"
+    + obj["symbol"]
+    + ".png"
+)
 
 
 
