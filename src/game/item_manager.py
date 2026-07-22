@@ -34,8 +34,43 @@ class ItemManager:
 
 
 
+class ItemManager:
+
+
+    def __init__(self):
+
+        self.items = {
+
+            ...
+
+        }
+
+
+
     def get_item(self,item_id):
 
         return self.items.get(
             item_id
         )
+
+
+
+    def add_item(self,item_id):
+
+        if item_id in self.items:
+
+            return self.items[item_id]
+
+        return None
+
+
+
+    def remove_item(self,item_id):
+
+        if item_id in self.items:
+
+            del self.items[item_id]
+
+            return True
+
+        return False
