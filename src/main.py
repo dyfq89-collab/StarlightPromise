@@ -1,34 +1,13 @@
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager
+
+from ui.game_screen import GameScreen
+from ui.bag_screen import BagScreen
+
+from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-
-
-# RPG系统导入
-
-from game.player import Player
-from game.map_manager import MapManager
-from game.dialog_manager import DialogManager
-from game.quest_manager import QuestManager
-from game.item_manager import ItemManager
-from game.save_manager import SaveManager
-
-
-
-# 游戏核心
-
-player = Player()
-
-maps = MapManager()
-
-dialogs = DialogManager()
-
-quests = QuestManager()
-
-items = ItemManager()
-
-save = SaveManager()
 
 
 
@@ -41,8 +20,7 @@ class MenuScreen(Screen):
 
 
         layout = BoxLayout(
-            orientation="vertical",
-            spacing=20
+            orientation="vertical"
         )
 
 
@@ -75,30 +53,8 @@ class MenuScreen(Screen):
 
     def start_game(self,instance):
 
-        self.manager.current="story"
+        self.manager.current="game"
 
-
-
-
-class StoryScreen(Screen):
-
-
-    def __init__(self, **kwargs):
-
-        super().__init__(**kwargs)
-
-
-        text = dialogs.get_dialog(
-            "start"
-        )
-
-
-        self.add_widget(
-            Label(
-                text=text,
-                font_size=30
-            )
-        )
 
 
 
@@ -109,24 +65,32 @@ class StarlightPromiseApp(App):
     def build(self):
 
 
-        sm = ScreenManager()
+        manager = ScreenManager()
 
 
-        sm.add_widget(
+        manager.add_widget(
             MenuScreen(
                 name="menu"
             )
         )
 
 
-        sm.add_widget(
-            StoryScreen(
-                name="story"
+        manager.add_widget(
+            GameScreen(
+                name="game"
             )
         )
 
 
-        return sm
+        manager.add_widget(
+            BagScreen(
+                name="bag"
+            )
+        )
+
+
+        return manager
+
 
 
 
