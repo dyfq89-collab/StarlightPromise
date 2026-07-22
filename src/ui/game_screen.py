@@ -3,6 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from ui.move_control import MoveControl
+from ui.map_view import MapView
 
 
 from game.game_controller import GameController
@@ -22,6 +23,16 @@ class GameScreen(Screen):
 
         self.layout = BoxLayout(
             orientation="vertical"
+        )
+
+        
+        self.map_view = MapView(
+            self.controller
+        )
+
+
+        self.layout.add_widget(
+            self.map_view
         )
 
 
@@ -155,7 +166,7 @@ class GameScreen(Screen):
 
 
         
-        def move_player(self,direction):
+def move_player(self,direction):
 
 
     result = self.controller.move_player(
@@ -163,4 +174,7 @@ class GameScreen(Screen):
     )
 
 
-    self.story.text = result
+    self.map_view.update_map()
+
+
+    self.story.text=result
