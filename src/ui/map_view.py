@@ -1,6 +1,7 @@
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.image import Image
+from kivy.uix.floatlayout import FloatLayout
 
 
 
@@ -76,16 +77,12 @@ class MapView(GridLayout):
 for obj in current_map["objects"].values():
 
 
-    ox = obj["x"]
+    x = obj["x"]
 
-    oy = obj["y"]
+    y = obj["y"]
 
 
-self.cells[y][x].source = (
-    "assets/"
-    + obj["tile"]
-    + ".png"
-)
+self.cells[y][x].source = self.get_image(obj["event"])
 
 
 
@@ -98,7 +95,7 @@ x,y = self.controller.player.get_position()
 
 if 0 <= x < self.cols and 0 <= y < self.rows:
 
-    self.cells[y][x].text = "😊"
+    self.cells[y][x].source = "assets/player.png"
 
 
 
@@ -108,4 +105,33 @@ for obj in current_map["objects"].values():
 
     if obj["x"] == x and obj["y"] == y:
 
-        self.cells[y][x].text = "😊" + obj["symbol"]
+        # 触发事件，不改变图片
+        result = self.controller.events.trigger(
+            obj["event"]
+        )
+        return result
+
+
+def get_image(self,event):
+
+    images = {
+
+        "find_letter":
+            "assets/letter.png",
+
+        "old_letter_found":
+            "assets/letter.png",
+
+        "open_box":
+            "assets/box.png",
+
+        "look_star":
+            "assets/star.png",
+
+    }
+
+
+    return images.get(
+        event,
+        "assets/grass.png"
+    )
