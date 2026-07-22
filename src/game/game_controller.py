@@ -77,28 +77,27 @@ class GameController:
         return self.events.trigger(
             "old_letter_found"
         )
+
+
+
+    
         
-     def move_player(self,direction):
+def move_player(self,direction):
+
+    self.player.move(direction)
+
+    x,y = self.player.get_position()
+
+    current_map = self.map.get_map()
 
 
-        self.player.move(direction)
+    for obj in current_map["objects"].values():
+
+        if obj["x"] == x and obj["y"] == y:
+
+            return self.events.trigger(
+                obj["event"]
+            )
 
 
-        x,y = self.player.get_position()
-
-
-        current_map = self.map.get_map()
-
-
-        for obj in current_map["objects"].values():
-
-            if obj["x"] == x and obj["y"] == y:
-
-                return self.events.trigger(
-                    obj["event"]
-                )
-
-
-        return (
-            f"当前位置：{x},{y}"
-        )
+    return f"你来到了 ({x},{y})"
