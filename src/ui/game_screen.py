@@ -4,6 +4,9 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 
 
+from game.game_controller import GameController
+
+
 
 class GameScreen(Screen):
 
@@ -13,84 +16,128 @@ class GameScreen(Screen):
         super().__init__(**kwargs)
 
 
+        self.controller = GameController()
+
+
         self.layout = BoxLayout(
             orientation="vertical"
         )
 
 
-        self.location = Label(
+        self.title = Label(
             text="星光小屋",
             font_size=35
         )
 
 
-        self.info = Label(
-            text=
-            "这里保存着许多珍贵的回忆。",
+        self.story = Label(
+            text="",
             font_size=25
         )
 
 
-        self.up = Button(
-            text="↑"
+        self.talk = Button(
+            text="与小星对话"
         )
 
 
-        self.down = Button(
-            text="↓"
+        self.quest = Button(
+            text="接受任务"
         )
 
 
-        self.left = Button(
-            text="←"
+        self.find = Button(
+            text="寻找信件"
         )
 
 
-        self.right = Button(
-            text="→"
+        self.talk.bind(
+            on_press=self.talk_npc
         )
 
 
-        self.explore = Button(
-            text="探索"
+        self.quest.bind(
+            on_press=self.accept_quest
         )
 
 
-        self.layout.add_widget(
-            self.location
-        )
-
-
-        self.layout.add_widget(
-            self.info
+        self.find.bind(
+            on_press=self.find_letter
         )
 
 
         self.layout.add_widget(
-            self.up
+            self.title
         )
 
 
         self.layout.add_widget(
-            self.left
+            self.story
         )
 
 
         self.layout.add_widget(
-            self.right
+            self.talk
         )
 
 
         self.layout.add_widget(
-            self.down
+            self.quest
         )
 
 
         self.layout.add_widget(
-            self.explore
+            self.find
         )
 
 
         self.add_widget(
             self.layout
         )
+
+
+        # 开始剧情
+
+        self.story.text = (
+            self.controller.start_game()
+        )
+
+
+
+    def talk_npc(self,instance):
+
+        self.story.text = (
+            self.controller.talk_npc(
+                "xiaoxing"
+            )
+        )
+
+
+
+    def accept_quest(self,instance):
+
+        quest = (
+            self.controller.accept_first_quest()
+        )
+
+
+        self.story.text = (
+            "任务："
+            +
+            quest["name"]
+            +
+            "\n"
+            +
+            quest["description"]
+        )
+
+
+
+    def find_letter(self,instance):
+
+        result = (
+            self.controller.find_letter()
+        )
+
+
+        self.story.text = result
