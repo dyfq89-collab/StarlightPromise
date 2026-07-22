@@ -13,6 +13,8 @@ class Player:
 
         # 背包
         self.inventory = []
+        
+        self.items = []
 
 
     def move(self, direction):
@@ -47,6 +49,11 @@ class Player:
     def has_item(self,item):
 
         return item in self.inventory
+        
+
+     def get_inventory(self):
+
+        return self.inventory
 
 
     def get_position(self):
