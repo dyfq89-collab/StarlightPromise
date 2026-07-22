@@ -1,37 +1,45 @@
 class QuestManager:
 
 
-    def __init__(self):
-
-        self.quests = {
-
-            "first_meet":
-            {
-                "name":"寻找星光信件",
-                "description":
-                "在星光小屋寻找隐藏的信件。",
-                "finished":False
-            },
+self.quests = {
 
 
-            "memory_forest":
-            {
-                "name":"穿越回忆森林",
-                "description":
-                "找到森林深处的秘密。",
-                "finished":False
-            },
+    "first_meet":
+    {
+        "name":"寻找星光信件",
+        "description":
+        "在星光小屋寻找隐藏的信件。",
+        "finished":False
+    },
 
 
-            "star_lake":
-            {
-                "name":"星光湖的约定",
-                "description":
-                "在星光湖完成最终约定。",
-                "finished":False
-            }
+    "find_letter":
+    {
+        "name":"寻找旧信件",
+        "description":
+        "在星光小屋寻找隐藏的旧信件。",
+        "finished":False
+    },
 
-        }
+
+    "memory_forest":
+    {
+        "name":"穿越回忆森林",
+        "description":
+        "找到森林深处的秘密。",
+        "finished":False
+    },
+
+
+    "star_lake":
+    {
+        "name":"星光湖的约定",
+        "description":
+        "在星光湖完成最终约定。",
+        "finished":False
+    }
+
+}
 
 
 
