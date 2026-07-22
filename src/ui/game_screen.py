@@ -176,5 +176,5 @@ def move_player(self,direction):
 
     self.map_view.update_map()
 
-
+if result:
     self.story.text=result
