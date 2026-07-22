@@ -95,7 +95,9 @@ x,y = self.controller.player.get_position()
 
 if 0 <= x < self.cols and 0 <= y < self.rows:
 
-    self.cells[y][x].source = "assets/player.png"
+        self.cells[y][x].source = self.get_image(
+        obj["event"]
+    )
 
 
 
@@ -106,11 +108,27 @@ for obj in current_map["objects"].values():
     if obj["x"] == x and obj["y"] == y:
 
         # 触发事件，不改变图片
-        result = self.controller.events.trigger(
-            obj["event"]
-        )
-        return result
+        result = self.check_event()
+        if result:
+           self.controller.show_message(result)
 
+def check_event(self):
+
+    current_map = self.controller.map.get_map()
+
+    x,y = self.controller.player.get_position()
+
+
+    for obj in current_map["objects"].values():
+
+        if obj["x"] == x and obj["y"] == y:
+
+            return self.controller.events.trigger(
+                obj["event"]
+            )
+
+
+    return ""
 
 def get_image(self,event):
 
