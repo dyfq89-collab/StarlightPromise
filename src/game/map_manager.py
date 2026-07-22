@@ -3,52 +3,76 @@ class MapManager:
 
     def __init__(self):
 
+        self.current_map = "star_house"
+
+
         self.maps = {
 
 
-            "star_light_house":
+            "star_house":
             {
                 "name":"星光小屋",
-                "description":
-                "故事开始的地方。"
-            },
+
+                "width":5,
+
+                "height":5,
 
 
-            "star_light_village":
-            {
-                "name":"星光村",
-                "description":
-                "充满回忆的小村庄。"
+                "objects":
+                {
+
+                    "desk":
+                    {
+                        "x":2,
+                        "y":2,
+                        "event":"find_letter"
+                    },
+
+
+                    "window":
+                    {
+                        "x":4,
+                        "y":1,
+                        "event":"look_star"
+                    }
+
+                }
+
             },
 
 
             "memory_forest":
             {
                 "name":"回忆森林",
-                "description":
-                "隐藏着过去的秘密。"
-            },
+
+                "width":8,
+
+                "height":8,
 
 
-            "star_light_lake":
-            {
-                "name":"星光湖",
-                "description":
-                "可以看到最亮的星星。"
-            },
+                "objects":
+                {
 
+                    "tree":
+                    {
+                        "x":5,
+                        "y":5,
+                        "event":"forest_memory"
+                    }
 
-            "star_garden":
-            {
-                "name":"星光花园",
-                "description":
-                "最终约定的地方。"
+                }
+
             }
 
         }
 
 
-        self.current_map = "star_light_house"
+
+    def get_map(self):
+
+        return self.maps[
+            self.current_map
+        ]
 
 
 
@@ -58,8 +82,7 @@ class MapManager:
 
             self.current_map = map_id
 
+            return True
 
 
-    def get_current_map(self):
-
-        return self.maps[self.current_map]
+        return False
