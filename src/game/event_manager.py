@@ -3,27 +3,32 @@ class EventManager:
 
     def __init__(self):
 
-        self.events = {
+self.events = {
+
+    "old_letter_found":
+    "你发现了一封旧信件，里面记录着重要的回忆。",
 
 
-            "old_letter_found":
-
-            "你发现了一封旧信件，里面记录着重要的回忆。",
-
+    "forest_secret":
+    "你发现森林深处隐藏的星光碎片。",
 
 
-            "forest_secret":
-
-            "你发现森林深处隐藏的星光碎片。",
-
+    "final":
+    "所有回忆汇聚成星光。",
 
 
-            "final":
+    "find_letter":
+    "你发现了一封旧信件！\n任务完成！",
 
-            "所有回忆汇聚成星光。"
+
+    "open_box":
+    "你打开宝箱，发现了一颗星星碎片。",
 
 
-        }
+    "look_star":
+    "窗外的星光照亮了你的回忆。"
+
+}
 
 
 
