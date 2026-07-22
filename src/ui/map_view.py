@@ -81,9 +81,9 @@ for obj in current_map["objects"].values():
     oy = obj["y"]
 
 
-    self.cells[y][x].source = (
+self.cells[y][x].source = (
     "assets/"
-    + obj["symbol"]
+    + obj["tile"]
     + ".png"
 )
 
