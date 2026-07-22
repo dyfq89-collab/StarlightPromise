@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from ui.move_control import MoveControl
 
 
 from game.game_controller import GameController
@@ -90,6 +91,16 @@ class GameScreen(Screen):
             self.find
         )
 
+        
+        self.move_control = MoveControl(
+            self.move_player
+        )
+        
+
+        self.layout.add_widget(
+            self.move_control
+        )
+        
 
         self.add_widget(
             self.layout
@@ -141,3 +152,15 @@ class GameScreen(Screen):
 
 
         self.story.text = result
+
+
+        
+        def move_player(self,direction):
+
+
+    result = self.controller.move_player(
+        direction
+    )
+
+
+    self.story.text = result
