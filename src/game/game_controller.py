@@ -52,3 +52,17 @@ class GameController:
     def state(self) -> dict:
         return {"map_id": self.map_manager.current_map_id, "position": self.player.position(), "inventory": self.player.inventory, "quests": self.quests.status, "events": sorted(self.completed_events)}
 
+    def restore(self, state: dict) -> None:
+        """Restore validated JSON state created by :meth:`state`."""
+        map_id = state.get("map_id", self.map_manager.current_map_id)
+        if map_id in self.map_manager.maps:
+            self.map_manager.current_map_id = map_id
+        x, y = state.get("position", self.map_manager.current_map["spawn"])
+        self.player.x, self.player.y = int(x), int(y)
+        self.player.inventory = {str(key): int(value) for key, value in state.get("inventory", {}).items()}
+        for quest_id, status in state.get("quests", {}).items():
+            if quest_id in self.quests.status and status in {"available", "active", "complete"}:
+                self.quests.status[quest_id] = status
+        self.completed_events = set(state.get("events", []))
+        self.message = "已读取你的星光旅程。"
+
