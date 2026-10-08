@@ -3,13 +3,35 @@
     "name": "星光小屋", "width": 8, "height": 6, "spawn": [1, 3],
     "blocked": [[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[0,1],[7,1],[0,2],[7,2],[0,3],[7,3],[0,4],[7,4],[0,5],[1,5],[2,5],[3,5],[4,5],[5,5],[6,5],[7,5]],
     "events": [
-      {"id":"letter", "position":[3,3], "kind":"item", "item":"old_letter", "start_quest":"find_starlight", "text":"你发现了神秘信件：请找到散落的星光，完成我们的约定。"},
+      {"id":"letter", "position":[3,3], "kind":"item", "item":"old_letter", "start_quest":"find_starlight", "complete_quest":"find_starlight", "text":"你发现了神秘信件：请找到散落的星光，完成我们的约定。"},
       {"id":"to_village", "position":[6,3], "kind":"transition", "target":"starlight_village", "requires_complete":"find_starlight", "text":"你带着信件走向星光村。"}
     ]
   },
-  "starlight_village": {"name":"星光村", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[{"id":"village_star", "position":[4,3], "kind":"item", "item":"star_fragment", "start_quest":"village_secret", "text":"在老树下，你找到了第一颗星光碎片。"}]},
-  "memory_forest": {"name":"回忆森林", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[]},
-  "starlight_lake": {"name":"星光湖", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[]},
-  "starlight_garden": {"name":"星光花园", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[]}
+  "starlight_village": {
+    "name":"星光村", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[
+      {"id":"noah", "position":[3,2], "kind":"message", "start_quest":"village_secret", "text":"诺亚：每一颗星光，都记着一段重要的回忆。"},
+      {"id":"village_star", "position":[5,3], "kind":"item", "item":"star_fragment", "complete_quest":"village_secret", "text":"在老树下，你找到了第一颗星光碎片。"},
+      {"id":"to_forest", "position":[7,3], "kind":"transition", "target":"memory_forest", "requires_complete":"village_secret", "text":"星光照亮了通向回忆森林的小路。"}
+    ]
+  },
+  "memory_forest": {
+    "name":"回忆森林", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[
+      {"id":"guardian", "position":[3,2], "kind":"message", "start_quest":"forest_memory", "text":"森林守护者：过去的记忆不会消失，它们只是在等待被发现。"},
+      {"id":"forest_star", "position":[5,3], "kind":"item", "item":"star_fragment", "complete_quest":"forest_memory", "text":"星星排列成道路，你找回了第二颗星光碎片。"},
+      {"id":"to_lake", "position":[7,3], "kind":"transition", "target":"starlight_lake", "requires_complete":"forest_memory", "text":"林间微光引你来到星光湖。"}
+    ]
+  },
+  "starlight_lake": {
+    "name":"星光湖", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[
+      {"id":"lake_girl", "position":[3,2], "kind":"message", "start_quest":"lake_reflection", "text":"湖畔少女：星光记录的不只是过去，也是你珍惜的人。"},
+      {"id":"lake_key", "position":[5,3], "kind":"item", "item":"starlight_key", "complete_quest":"lake_reflection", "text":"倒影中的星光排成钥匙，你获得了星光钥匙。"},
+      {"id":"to_garden", "position":[7,3], "kind":"transition", "target":"starlight_garden", "requires_complete":"lake_reflection", "text":"星光钥匙打开了花园的大门。"}
+    ]
+  },
+  "starlight_garden": {
+    "name":"星光花园", "width":8, "height":6, "spawn":[1,3], "blocked":[], "events":[
+      {"id":"finale", "position":[4,3], "kind":"message", "start_quest":"starlight_promise", "text":"所有回忆汇聚成光。谢谢你，一直陪伴我。\n\n生日快乐！"}
+    ]
+  }
 }
 
