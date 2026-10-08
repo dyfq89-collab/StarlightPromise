@@ -1,0 +1,42 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [codex/foundation]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    env:
+      PYTHONFORANDROID_PREREQUISITES_INSTALL_INTERACTIVE: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ant autoconf automake autopoint ccache cmake g++ gcc git lbzip2 libffi-dev libltdl-dev libssl-dev libtool make patch pkg-config python3-dev unzip wget zip zlib1g-dev libncurses5-dev libncursesw5-dev
+          python -m pip install --upgrade pip buildozer
+      - name: Build debug APK
+        run: |
+          set +e
+          buildozer -v android debug > buildozer.log 2>&1
+          build_status=$?
+          tail -n 240 buildozer.log
+          exit $build_status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-build-output
+          path: |
+            bin/*.apk
+            buildozer.log
+          if-no-files-found: warn

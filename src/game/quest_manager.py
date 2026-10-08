@@ -1,64 +1,30 @@
+"""Quest lifecycle management."""
+
+from .data_loader import load_data
+
+
 class QuestManager:
+    AVAILABLE = "available"
+    ACTIVE = "active"
+    COMPLETE = "complete"
 
+    def __init__(self) -> None:
+        self.definitions = load_data("quests.json")
+        self.status = {quest_id: self.AVAILABLE for quest_id in self.definitions}
 
-self.quests = {
+    def start(self, quest_id: str) -> None:
+        if quest_id in self.definitions and self.status[quest_id] == self.AVAILABLE:
+            self.status[quest_id] = self.ACTIVE
 
+    def complete(self, quest_id: str) -> bool:
+        if self.status.get(quest_id) != self.ACTIVE:
+            return False
+        self.status[quest_id] = self.COMPLETE
+        return True
 
-    "first_meet":
-    {
-        "name":"寻找星光信件",
-        "description":
-        "在星光小屋寻找隐藏的信件。",
-        "finished":False
-    },
+    def active_quest(self) -> tuple[str, dict] | None:
+        for quest_id, status in self.status.items():
+            if status == self.ACTIVE:
+                return quest_id, self.definitions[quest_id]
+        return None
 
-
-    "find_letter":
-    {
-        "name":"寻找旧信件",
-        "description":
-        "在星光小屋寻找隐藏的旧信件。",
-        "finished":False
-    },
-
-
-    "memory_forest":
-    {
-        "name":"穿越回忆森林",
-        "description":
-        "找到森林深处的秘密。",
-        "finished":False
-    },
-
-
-    "star_lake":
-    {
-        "name":"星光湖的约定",
-        "description":
-        "在星光湖完成最终约定。",
-        "finished":False
-    }
-
-}
-
-
-
-    def complete_quest(self,quest_id):
-
-        if quest_id in self.quests:
-
-            self.quests[quest_id]["finished"] = True
-
-
-
-    def get_quest(self,quest_id):
-
-        return self.quests.get(
-            quest_id
-        )
-
-
-
-    def get_all_quests(self):
-
-        return self.quests
