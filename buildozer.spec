@@ -12,7 +12,7 @@ android.api = 33
 android.minapi = 23
 android.ndk_api = 28
 android.permissions = INTERNET
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 android.accept_sdk_license = True
 
 [buildozer]
