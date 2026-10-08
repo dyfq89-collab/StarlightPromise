@@ -35,11 +35,15 @@ class GameController:
                 self.message = event["text"]
                 if event.get("start_quest"):
                     self.quests.start(event["start_quest"])
+                if event.get("complete_quest"):
+                    self.quests.complete(event["complete_quest"])
             elif kind == "transition" and self._requirements_met(event):
                 self.player.x, self.player.y = self.map_manager.change_map(event["target"])
                 self.message = event["text"]
             elif kind == "message":
                 self.message = event["text"]
+                if event.get("start_quest"):
+                    self.quests.start(event["start_quest"])
 
     def _requirements_met(self, event: dict) -> bool:
         quest_id = event.get("requires_complete")
