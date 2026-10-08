@@ -5,7 +5,7 @@ package.domain = org.starlight
 source.dir = src
 source.include_exts = py,json,png,jpg,kv,atlas,ttf
 version = 1.0.0
-requirements = python3,kivy
+requirements = python3==3.12.11,hostpython3==3.12.11,kivy
 orientation = landscape
 fullscreen = 0
 android.api = 33
