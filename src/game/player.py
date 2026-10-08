@@ -1,64 +1,33 @@
+"""Player state and grid movement for Starlight Promise."""
+
+from dataclasses import dataclass, field
+
+
+@dataclass
 class Player:
+    """A player positioned on the current tile map."""
 
-    def __init__(self):
+    x: int = 1
+    y: int = 3
+    inventory: dict[str, int] = field(default_factory=dict)
 
-        self.name = "Traveler"
+    def position(self) -> tuple[int, int]:
+        return self.x, self.y
 
-        # 玩家位置
-        self.x = 0
-        self.y = 0
+    def move(self, direction: str, width: int, height: int, blocked: set[tuple[int, int]]) -> bool:
+        deltas = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
+        if direction not in deltas:
+            return False
+        dx, dy = deltas[direction]
+        target = self.x + dx, self.y + dy
+        if not (0 <= target[0] < width and 0 <= target[1] < height) or target in blocked:
+            return False
+        self.x, self.y = target
+        return True
 
-        # 当前地图
-        self.current_map = "star_light_house"
+    def add_item(self, item_id: str, amount: int = 1) -> None:
+        self.inventory[item_id] = self.inventory.get(item_id, 0) + amount
 
-        # 背包
-        self.inventory = []
-        
-        self.items = []
+    def has_item(self, item_id: str, amount: int = 1) -> bool:
+        return self.inventory.get(item_id, 0) >= amount
 
-
-    def move(self, direction):
-
-        if direction == "up":
-            self.y += 1
-
-        elif direction == "down":
-            self.y -= 1
-
-        elif direction == "left":
-            self.x -= 1
-
-        elif direction == "right":
-            self.x += 1
-
-
-
-    def add_item(self,item):
-
-        self.inventory.append(item)
-
-
-
-    def remove_item(self,item):
-
-        if item in self.inventory:
-            self.inventory.remove(item)
-
-
-
-    def has_item(self,item):
-
-        return item in self.inventory
-        
-
-     def get_inventory(self):
-
-        return self.inventory
-
-
-    def get_position(self):
-
-        return (
-            self.x,
-            self.y
-        )
