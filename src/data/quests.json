@@ -1,0 +1,8 @@
+{
+  "find_starlight": {"name": "消失的星光", "objective": "收下桌上的信，并前往星光村。"},
+  "village_secret": {"name": "星光村的秘密", "objective": "寻找第一颗星光碎片。"},
+  "forest_memory": {"name": "回忆森林的谜题", "objective": "找回森林深处的记忆。"},
+  "lake_reflection": {"name": "湖面的倒影", "objective": "完成星光湖的试炼。"},
+  "starlight_promise": {"name": "星光之约", "objective": "在花园开启星光之门。"}
+}
+
